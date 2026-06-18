@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Care Parañaque</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .phone {
+    width: 360px;
+    height: 780px;
+    background: #f5f5f5;
+    border-radius: 36px;
+    border: 6px solid #222;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+  }
+.fade-in {
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+  .hero {
+    background: url('https://scontent.fmnl8-2.fna.fbcdn.net/v/t1.15752-9/725663472_1013782534967518_3349436924045786127_n.png?stp=dst-png&cstp=mx850x516&ctp=s850x516&_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGUTb3WjXpCTvPbgR1MY1-G85XiIcb5Ql3zleIhxvlCXcxYPhMPQ2EdEbY-2Q5EpDQLHHz79SF74J2r6wWLa9nr&_nc_ohc=aNFDu4NtbBQQ7kNvwFkxj58&_nc_oc=Ado9gfj8KOXy5g__qB2kufgWOZs484jBMZu5qv5AbNfGWdYIY2HfZ0SRNELDe8ntr98&_nc_zt=23&_nc_ht=scontent.fmnl8-2.fna&_nc_ss=7b2a8&oh=03_Q7cD5gEuS9XluxkIqfJORA9-4DGqUE0DTlDjQMFHO_PXtiQA-A&oe=6A5A09FF') center/cover no-repeat;
+    padding: 20px 20px 60px;   /* Increased bottom padding for overlap space */
+    position: relative;
+    overflow: visible;
+    min-height: 180px;
+  }
+.citizen-card {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 250px;
+}
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 99999;
+}
+  .logo { display: flex; align-items: baseline; gap: 4px; }
+  .logo-care { font-size: 26px; font-weight: 800; color: #111; letter-spacing: -0.5px; }
+  .logo-location { font-size: 13px; color: #333; font-weight: 500; }
+  .avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.city-dropdown{
+    position:relative;
+    z-index:99999;
+}
+
+.city-header{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.city-menu{
+    position:absolute;
+    top:40px;
+    left:-20px;
+
+    width:200px;
+
+    background:white;
+    border-radius:12px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+    z-index:99999;
+
+    overflow:hidden;
+
+    max-height:0;
+    opacity:0;
+
+    transition:
+        max-height 0.3s ease,
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+    transform:translateY(-10px);
+}
+.phone.dark-mode .city-menu{
+    background:#333 !important;
+    border:1px solid #444 !important;
+}
+.city-menu.show{
+    max-height:300px;
+    opacity:1;
+    transform:translateY(0);
+}
+
+.city-menu div{
+    padding:12px 15px;
+    cursor:pointer;
+}
+
+.city-menu div:hover{
+    background:#f5f5f5;
+}
+
+@keyframes dropdownFade{
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.notif-dot {
+  width: 10px;
+  height: 10px;
+  background: #ff3b30;
+  border-radius: 50%;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  border: 1.5px solid white;
+  z-index: 10;
+}
+  
+  .tagline {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.35;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Search bar moved here and styled to overlap */
+  .search-bar {
+    background: white;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: -28px 14px 18px;   /* Negative margin creates overlap */
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
+  }
+  .search-bar input {
+    border: none; outline: none;
+    font-size: 14px; color: #aaa;
+    flex: 1; background: transparent;
+    font-family: inherit;
+  }
+  .search-bar input::placeholder { color: #bbb; }
+  .search-bar i { font-size: 18px; color: #bbb; }
+
+  .content {
+    background: #f5f5f5;
+    flex: 1;
+    padding: 0 14px 20px;
+    overflow-y: auto;
+  }
+
+  .section-label {
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px 12px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #ebebeb;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-align: center;
+  }
+  .service-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .service-card i { font-size: 28px; color: #333; }
+  .service-name { font-size: 13px; font-weight: 500; color: #222; }
+  .whats-up {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 10px;
+  }
+  .announcements { display: flex; flex-direction: column; gap: 8px; }
+  .ann-card {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 72px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: transform 0.15s;
+  }
+  .ann-card:hover { transform: scale(1.01); }
+  .ann-bg-text {
+    position: absolute;
+    right: 10px;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    opacity: 0.18;
+    user-select: none;
+  }
+  .ann-1 { background: linear-gradient(90deg, #f7971e, #ffd200); }
+  .ann-1 .ann-bg-text { color: #7a4700; }
+  .ann-2 { background: linear-gradient(90deg, #1a6dd4, #42a5f5); }
+  .ann-2 .ann-bg-text { color: white; }
+  .ann-3 {
+  background: url('https://scontent.fmnl8-3.fna.fbcdn.net/v/t1.15752-9/725683966_2279242952880685_3268803575215934642_n.png?stp=dst-png&cstp=mx643x152&ctp=s643x152&_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHVt3bdv7w2bTxOmEZMPXD9V4lcZRSSi5NXiVxlFJKLk3boEYmcRh5kgzqDcmhSOF8o67ZdyVt0bh9v7iToupTb&_nc_ohc=JDdKTmZHgQcQ7kNvwHnr_jy&_nc_oc=AdoFBDF_OftO5sPZUT-NoBGJcy5M-lmmscQBx7PXHMnTvh8x-T8WWnHOUwP8Ng8BFOY&_nc_zt=23&_nc_ht=scontent.fmnl8-3.fna&_nc_ss=7b2a8&oh=03_Q7cD5gE7W90RwvYAEBHQXjYYrXKf2QxKYk7KF6ExljfPGlwrrg&oe=6A5A1783')
+              center/cover no-repeat;
+  position: relative;
+}
+
+.ann-3::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.ann-3 .ann-text {
+  position: relative;
+  z-index: 1;
+}
+
+.ann-3 .ann-bg-text {
+  display: none;
+}
+
+.ann-3 .ann-tag,
+.ann-3 .ann-title {
+  color: white;
+}
+  .ann-text {
+    position: relative;
+    z-index: 1;
+    padding: 10px 14px;
+  }
+  .ann-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+  }
+  .ann-title {
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .ann-1 .ann-tag  { color: rgba(74,40,0,0.65); }
+  .ann-1 .ann-title { color: #3a1f00; }
+  .ann-2 {
+  background: url('https://scontent.fmnl8-7.fna.fbcdn.net/v/t1.15752-9/724335223_1626258868472784_6339492271370972950_n.png?stp=dst-png&cstp=mx634x157&ctp=s634x157&_nc_cat=106&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFyQWVyH4oJpGfLtfoiIvViDnv4cBeJogsOe_hwF4miCzZfv3qgs5YLG-kMX-TzYWnbQriYD4IEGzx0pBPzQbXJ&_nc_ohc=5Xi-mjgPLAgQ7kNvwEOYRMt&_nc_oc=AdoJnMZqRe7PnUYCZlVAV6ePUILxmgKNDCr9UN8Uk4utuEQZT2S-2hx-BIhgrl2zt9A&_nc_zt=23&_nc_ht=scontent.fmnl8-7.fna&_nc_ss=7b2a8&oh=03_Q7cD5gF_lWZohSfZthZc2Wx9XXgVIIodG2LyZjJdsirs6AX6Zw&oe=6A5A1142')
+              center/cover no-repeat;
+  position: relative;
+}
+
+.ann-2::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.ann-2 .ann-text {
+  position: relative;
+  z-index: 1;
+}
+
+.ann-2 .ann-bg-text {
+  display: none;
+}
+
+.ann-2 .ann-tag,
+.ann-2 .ann-title {
+  color: white;
+}
+  .ann-3 .ann-tag  { color: rgba(255,255,255,0.7); }
+  .ann-3 .ann-title { color: white; }
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #aaa;
+    padding: 16px 0 4px;
+  }
+.profile-content {
+    background: #efefef;
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.profile-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:24px;
+}
+
+.profile-title {
+    font-size:20px;
+    font-weight:700;
+    color:#222;
+}
+
+.profile-subtitle {
+    font-size:9px;
+    color:#777;
+}
+
+.edit-btn {
+    border:none;
+    border-radius:24px;
+    background:#efefef;
+    padding:10px 22px;
+
+    box-shadow:
+        6px 6px 12px rgba(0,0,0,0.08),
+        -6px -6px 12px rgba(255,255,255,0.9);
+}
+
+.profile-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.field label {
+    display:block;
+    margin-bottom:8px;
+    padding-left:8px;
+    font-size:13px;
+    color:#222;
+}
+
+.field input {
+    width:100%;
+    height:36px;
+    border:none;
+    outline:none;
+    border-radius:18px;
+    background:#efefef;
+
+    box-shadow:
+        4px 4px 8px rgba(0,0,0,0.08),
+        -4px -4px 8px rgba(255,255,255,0.9);
+
+    padding:0 12px;
+    font-size:13px;
+}
+.barangay-list {
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    margin-bottom: 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+@keyframes popupAnimation {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content {
+    animation: popupAnimation 0.25s ease;
+}
+.phone.dark-mode{
+    background:#1a1a1a !important;
+    color:white !important;
+}
+
+.phone.dark-mode .content{
+    background:#222 !important;
+}
+
+.phone.dark-mode .service-card{
+    background:#333 !important;
+    border-color:#444 !important;
+}
+
+.phone.dark-mode .service-name,
+.phone.dark-mode .whats-up,
+.phone.dark-mode .section-label,
+.phone.dark-mode .logo-care,
+.phone.dark-mode .logo-location,
+.phone.dark-mode .city-header{
+  color:#1a1a1a !important;
+}
+.phone.dark-mode .footer{
+    color:white !important;
+}
+
+.phone.dark-mode .service-card i{
+    color:white !important;
+}
+
+.phone.dark-mode .search-bar{
+    background:#333 !important;
+    border-color:#444 !important;
+}
+
+.phone.dark-mode .search-bar input{
+    color:white !important;
+}
+
+.phone.dark-mode .search-bar i{
+    color:#ddd !important;
+}
+
+.phone.dark-mode .city-menu{
+    background:#333 !important;
+    border:1px solid #444;
+}
+
+.phone.dark-mode .city-menu div{
+    color:rgb(27, 27, 27) !important;
+}
+
+.phone.dark-mode .city-menu div:hover{
+    background:#444 !important;
+}
+.phone.dark-mode #searchResults{
+    background:#333 !important;
+    border:1px solid #444 !important;
+}
+
+.phone.dark-mode #searchResults div{
+    background:#333 !important;
+    color:white !important;
+}
+
+.phone.dark-mode #searchResults strong{
+    color:white !important;
+}
+
+.phone.dark-mode #searchResults small{
+    color:#ccc !important;
+}
+
+.phone.dark-mode #searchResults div:hover{
+    background:#444 !important;
+}
+</style>
+</head>
+<body>
+<div class="phone" id="homePage">
+  <div class="hero">
+    <div class="topbar">
+      <div class="logo">
+
+    <span class="logo-care">Care</span>
+
+    <div class="city-dropdown">
+
+        <div class="city-header" onclick="toggleCityMenu()">
+            <span>Parañaque</span>
+            <span id="arrow">▼</span>
+        </div>
+
+        <div id="cityMenu" class="city-menu">
+
+            <div onclick="downloadID()">
+                📥 Download ID
+            </div>
+
+            <div onclick="openQR()">
+                📷 Scan QR Code
+            </div>
+
+            <div onclick="toggleDarkMode()">
+                🌙 Dark Mode
+            </div>
+
+            <div onclick="openHelp()">
+                ❓ Help
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+      <div class="avatar" onclick="openProfile()">
+        <img src = "https://scontent.fmnl8-3.fna.fbcdn.net/v/t1.15752-9/724458839_1542169477501927_1156337809908272459_n.png?stp=dst-png&cstp=mx161x162&ctp=s161x162&_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHvQHbVJnekO6MQ3POW6crYvsI9bOtpoMi-wj1s62mgyNOi0KPsgxsvdgSobcdZScOWjTBOY6MleOGnClUZfJM_&_nc_ohc=Jd_tPo3O6bUQ7kNvwE2RGZK&_nc_oc=AdreCeP3aFi0G_KKfH2Zfvr7a80tf342aEy1BspW0JRKSYXe_r3ruGqL7tRPYLWB0SY&_nc_zt=23&_nc_ht=scontent.fmnl8-3.fna&_nc_ss=7b2a8&oh=03_Q7cD5gEB3RdFyYf74MZxGDuS3F_hGhp5d9YVa8v9Cb6LYMnbmw&oe=6A5A054E" class="circle-image" width="25">
+        <div class="notif-dot"></div>
+      </div>
+    </div>
+    <p class="tagline">One card. One platform.<br>Better service.</p>
+  </div>
+
+  <!-- Search bar moved here -->
+  <div class="search-bar">
+    <div id="searchResults"
+     style="
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        right:0;
+        background:white;
+        border-radius:12px;
+        box-shadow:0 4px 12px rgba(0,0,0,.1);
+        z-index:1000;
+     ">
+</div>
+    <i class="ti ti-search"></i>
+    <input id="searchInput"
+       type="text"
+       placeholder="What are you looking for?" />
+    <i class="ti ti-adjustments-horizontal"></i>
+  </div>
+
+  <div class="content">
+    <div class="section-label">
+      <i class="ti ti-info-circle" onclick="openServicesInfo()" style="cursor:pointer;"></i>
+      Services
+    </div>
+    <div class="services-grid">
+    <div class="service-card" onclick="openOffices()">
+  <i class="ti ti-building-bank"></i>
+  <span class="service-name">Offices</span>
+</div>
+      <div class="service-card" onclick="openHealth()">
+    <i class="ti ti-heart-plus"></i>
+    <span class="service-name">Health</span>
+</div>
+     <div class="service-card" onclick="openBarangay()">
+    <i class="ti ti-building-community"></i>
+    <span class="service-name">Barangay</span>
+</div>
+      <div class="service-card" onclick="openSocial()">
+    <i class="ti ti-users"></i>
+    <span class="service-name">Social</span>
+</div>
+    </div>
+
+    <div class="whats-up">What's up with Parañaque?</div>
+
+    <div class="announcements">
+      <div class="ann-card ann-1">
+        <div class="ann-bg-text">TEFAP 2026</div>
+        <div class="ann-text">
+          <div class="ann-tag">New announcement</div>
+          <div class="ann-title">TEFAP 2026</div>
+        </div>
+      </div>
+      <div class="ann-card ann-2">
+        <div class="ann-bg-text">PESO</div>
+        <div class="ann-text">
+          <div class="ann-title">PESO Parañaque</div>
+        </div>
+      </div>
+      <div class="ann-card ann-3">
+        <div class="ann-bg-text">OJT</div>
+        <div class="ann-text">
+          <div class="ann-tag">Government program</div>
+          <div class="ann-title">OJT Government Internship Program</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">All rights reserved ©</div>
+  </div>
+</div>
+
+<!-- PROFILE PAGE -->
+<div class="phone" id="profilePage" style="display:none;flex-direction:column;">
+    <div class="hero">
+    
+  <div class="topbar"><img src= "Virtual-ID.png" class="citizen-card">
+  </div>
+</div>
+  <div class="profile-content">
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
+
+        <div>
+            <div class="profile-title">Personal Information</div>
+            <div class="profile-subtitle">
+                Identity, Contact Details, and Government Account References
+            </div>
+        </div>
+
+        <button class="edit-btn" onclick="toggleEdit()">
+            Edit
+        </button>
+
+    </div>
+
+    <div class="profile-grid">
+
+        <div class="field">
+            <label>Last Name</label>
+            <input disabled>
+        </div>
+
+        <div class="field">
+            <label>First Name</label>
+            <input disabled>
+        </div>
+
+        <div class="field">
+            <label>Middle Name</label>
+            <input disabled>
+        </div>
+
+        <div class="field">
+            <label>Suffix</label>
+            <input disabled>
+        </div>
+
+        <div class="field">
+            <label>Gender</label>
+            <input disabled>
+        </div>
+
+        <div class="field">
+            <label>Birthdate</label>
+            <input disabled>
+        </div>
+
+        <div class="field">
+    <label>Contact Number</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>Email</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>Place of Birth</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>Beneficiary Type</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>Voter's Precinct</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>GSIS/SSS No.</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>Pag-Ibig No.</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>Blood Type</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>Occupation</label>
+    <input disabled>
+</div>
+
+<div class="field">
+    <label>PhilHealth No.</label>
+    <input disabled>
+</div>
+
+    </div>
+
+    <button onclick="goBack()"
+        style="width:100%;margin-top:20px;padding:12px;border:none;border-radius:20px;background:#ececec;font-weight:600;">
+        ← Go Back
+    </button>
+
+</div>
+</div>
+<div id="officesModal"
+     style="display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.4);
+            justify-content:center;
+            align-items:center;
+            z-index:999;">
+
+    <div class="modal-content"
+     style="width:320px;
+            background:white;
+            border-radius:20px;
+            padding:20px;">
+
+        <h2 style="margin-bottom:15px;">
+            Government Offices
+        </h2>
+
+        <div class="service-card">Mayor's Office</div>
+        <div class="service-card">DRRMO</div>
+        <div class="service-card">Legal Office</div>
+        <div class="service-card">Parañaque City College</div>
+        <div class="service-card">Agriculture Office</div>
+        <div class="service-card">Councilor Pablo Olivarez</div>
+
+        <button onclick="closeOffices()"
+            style="width:100%;
+                   margin-top:15px;
+                   padding:12px;
+                   border:none;
+                   border-radius:12px;">
+            Close
+        </button>
+
+    </div>
+
+</div>
+<div id="healthModal"
+     style="display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.4);
+            justify-content:center;
+            align-items:center;
+            z-index:999;">
+
+    <div class="modal-content"
+     style="width:320px;
+            background:white;
+            border-radius:20px;
+            padding:20px;">
+
+        <h2 style="margin-bottom:15px;">
+            Health Services
+        </h2>
+
+        <div class="service-card">OSPAR 2</div>
+        <div class="service-card">City Health Office</div>
+        <div class="service-card">CHO - Dental Division</div>
+        <div class="service-card">CHO - City Nutrition</div>
+        <div class="service-card">Parañaque Health Plan Office (PHPO)</div>
+
+        <button onclick="closeHealth()"
+            style="width:100%;
+                   margin-top:15px;
+                   padding:12px;
+                   border:none;
+                   border-radius:12px;">
+            Close
+        </button>
+
+    </div>
+
+</div>
+<div id="barangayModal"
+     style="display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.4);
+            justify-content:center;
+            align-items:center;
+            z-index:999;">
+
+    <div class="modal-content"
+     style="width:320px;
+            background:white;
+            border-radius:20px;
+            padding:20px;">
+
+        <h2 style="margin-bottom:15px;">
+            Barangay Services
+        </h2>
+        <div class="barangay-list">
+        <div class="service-card">Barangay BF Homes</div>
+        <div class="service-card">Barangay Don Bosco</div>
+        <div class="service-card">Barangay San Antonio</div>
+        <div class="service-card">Barangay Moonwalk</div>
+        <div class="service-card">Barangay Marcelo Green</div>
+        <div class="service-card">Barangay Sun Valley</div>
+        <div class="service-card">Barangay Vitalez</div>
+        <div class="service-card">Barangay La Huerta</div>
+        </div>
+        <button onclick="closeBarangay()"
+            style="width:100%;
+                   margin-top:15px;
+                   padding:12px;
+                   border:none;
+                   border-radius:12px;">
+            Close
+        </button>
+
+    </div>
+
+</div>
+<div id="socialModal"
+     style="display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.4);
+            justify-content:center;
+            align-items:center;
+            z-index:999;">
+
+    <div class="modal-content"
+     style="width:320px;
+            background:white;
+            border-radius:20px;
+            padding:20px;">
+
+        <h2 style="margin-bottom:15px;">
+            Social Services
+        </h2>
+        <div>
+            <div class="service-card">OSCA (Senior Citizens Affairs)</div>
+            <div class="service-card">PWD Affairs Office</div>
+            <div class="service-card">Solo Parent Affairs</div>
+            <div class="service-card">Youth Development Office</div>
+            <div class="service-card">City Social Welfare & Development Office</div>
+            <div class="service-card">Women's Welfare Desk</div>
+            <div class="service-card">Family and Community Services</div>
+
+        </div>
+
+        <button onclick="closeSocial()"
+            style="width:100%;
+                   margin-top:15px;
+                   padding:12px;
+                   border:none;
+                   border-radius:12px;">
+            Close
+        </button>
+
+    </div>
+
+</div>
+<div id="servicesInfoModal"
+     style="display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.4);
+            justify-content:center;
+            align-items:center;
+            z-index:999;">
+
+    <div class="modal-content"
+         style="width:300px;
+                background:white;
+                border-radius:20px;
+                padding:20px;">
+
+        <h2 style="margin-bottom:10px;">
+            About Services
+        </h2>
+
+        <p style="font-size:14px; line-height:1.5; color:#555;">
+            Services provides quick access to government programs,
+            offices, healthcare facilities, barangay services,
+            and social welfare assistance available in the City of Parañaque.
+            Select a category to view the available services and offices.
+        </p>
+
+        <button onclick="closeServicesInfo()"
+                style="width:100%;
+                       margin-top:15px;
+                       padding:12px;
+                       border:none;
+                       border-radius:12px;">
+            Got it
+        </button>
+
+    </div>
+
+</div>
+<div id="qrModal"
+     style="display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.5);
+            justify-content:center;
+            align-items:center;
+            z-index:99999;">
+
+    <div style="
+        width:300px;
+        background:white;
+        border-radius:20px;
+        padding:20px;
+        text-align:center;
+        animation:popupShow .25s ease;
+    ">
+
+        <h2>Citizen QR Code</h2>
+
+        <img src="QR.png"
+             style="
+                width:220px;
+                margin:15px 0;
+             ">
+
+        <p style="font-size:13px;color:#666;">
+            Scan this QR code to verify citizen information.
+        </p>
+
+        <button onclick="closeQR()"
+            style="
+                width:100%;
+                padding:12px;
+                margin-top:15px;
+                border:none;
+                border-radius:12px;
+                cursor:pointer;
+            ">
+            Close
+        </button>
+
+    </div>
+
+</div>
+<script>
+function openProfile() {
+  document.getElementById('homePage').style.display = 'none';
+
+  const profile = document.getElementById('profilePage');
+  profile.style.display = 'flex';
+  profile.classList.add('fade-in');
+}
+function goBack() {
+  document.getElementById('profilePage').style.display = 'none';
+
+  const home = document.getElementById('homePage');
+  home.style.display = 'flex';
+  home.classList.add('fade-in');
+}
+function toggleEdit() {
+  document.querySelectorAll('#profilePage input, #profilePage textarea').forEach(el => {
+    el.disabled = !el.disabled;
+  });
+}
+function openOffices() {
+    document.getElementById('officesModal').style.display = 'flex';
+}
+function closeOffices() {
+    document.getElementById('officesModal').style.display = 'none';
+}
+function openHealth() {
+    document.getElementById('healthModal').style.display = 'flex';
+}
+
+function closeHealth() {
+    document.getElementById('healthModal').style.display = 'none';
+}
+function openBarangay() {
+    document.getElementById('barangayModal').style.display = 'flex';
+}
+
+function closeBarangay() {
+    document.getElementById('barangayModal').style.display = 'none';
+}
+function openSocial() {
+    document.getElementById('socialModal').style.display = 'flex';
+}
+
+function closeSocial() {
+    document.getElementById('socialModal').style.display = 'none';
+}
+function openServicesInfo() {
+    document.getElementById('servicesInfoModal').style.display = 'flex';
+}
+
+function closeServicesInfo() {
+    document.getElementById('servicesInfoModal').style.display = 'none';
+}
+const searchData = [
+    { name: "Mayor's Office", category: "Offices", action: openOffices },
+    { name: "DRRMO", category: "Offices", action: openOffices },
+    { name: "Legal Office", category: "Offices", action: openOffices },
+
+    { name: "City Health Office", category: "Health", action: openHealth },
+    { name: "Dental Division", category: "Health", action: openHealth },
+    { name: "OSPAR 2", category: "Health", action: openHealth },
+
+    { name: "Barangay Don Bosco", category: "Barangay", action: openBarangay },
+    { name: "Barangay BF Homes", category: "Barangay", action: openBarangay },
+
+    { name: "OSCA", category: "Social", action: openSocial },
+    { name: "PWD Affairs Office", category: "Social", action: openSocial }
+];
+document.getElementById("searchInput")
+.addEventListener("input", function () {
+
+    const query = this.value.toLowerCase();
+
+    const resultsDiv =
+        document.getElementById("searchResults");
+
+    if(query === "") {
+        resultsDiv.style.display = "none";
+        return;
+    }
+
+    const matches = searchData.filter(item =>
+        item.name.toLowerCase().includes(query)
+    );
+
+    if(matches.length === 0) {
+        resultsDiv.innerHTML =
+            "<div style='padding:12px;'>No results found</div>";
+
+        resultsDiv.style.display = "block";
+        return;
+    }
+
+    resultsDiv.innerHTML = matches.map(item => `
+        <div
+            style="
+                padding:12px;
+                border-bottom:1px solid #eee;
+                cursor:pointer;
+            "
+            onclick="${item.category === 'Offices' ? 'openOffices()' :
+                      item.category === 'Health' ? 'openHealth()' :
+                      item.category === 'Barangay' ? 'openBarangay()' :
+                      'openSocial()'}">
+
+            <strong>${item.name}</strong><br>
+            <small>${item.category}</small>
+
+        </div>
+    `).join("");
+
+    resultsDiv.style.display = "block";
+});
+function toggleCityMenu(){
+
+    const menu = document.getElementById("cityMenu");
+    const arrow = document.getElementById("arrow");
+
+    menu.classList.toggle("show");
+
+    if(menu.classList.contains("show")){
+        arrow.innerHTML = "▲";
+    }else{
+        arrow.innerHTML = "▼";
+    }
+
+}
+function downloadID() {
+
+    const link = document.createElement("a");
+
+    link.href = "Virtual-ID.png";
+
+    link.download = "CARE-Paranaque-ID.png";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+}
+function openQR() {
+    document.getElementById("qrModal").style.display = "flex";
+}
+
+function closeQR() {
+    document.getElementById("qrModal").style.display = "none";
+}
+function toggleDarkMode(){
+
+    document.querySelector(".phone").classList.toggle("dark-mode");
+
+}
+</script>
+
+</body>
+</html>
